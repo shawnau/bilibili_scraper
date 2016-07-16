@@ -17,7 +17,7 @@ redirectXpath = ".//*[@id='RegionPanel1_UpRegion_ContentPanel1_content']/table/t
 logoutXpath = ".//*[@id='ext-gen42']"
 infoXpath = ".//*[@id='ext-gen51']"
 # some system path you need to config by yourself
-phantomjsPpath = "/Users/Shawn/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs"
+phantomjsPath = "/Users/Shawn/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs"
 savePath = "/Users/Shawn/Documents/webscraper/data/"
 
 
@@ -35,7 +35,7 @@ def load_cookies(driver, file_path):
 
 
 def login(login_url, username, password):
-    driver = webdriver.PhantomJS(executable_path=phantomjsPpath,
+    driver = webdriver.PhantomJS(executable_path=phantomjsPath,
                                  desired_capabilities=dcap)
     try:
         driver.get(login_url)
@@ -61,7 +61,7 @@ def login(login_url, username, password):
 
 
 def scraper(login_url, scrape_url):
-    driver = webdriver.PhantomJS(executable_path=phantomjsPpath,
+    driver = webdriver.PhantomJS(executable_path=phantomjsPath,
                                  desired_capabilities=dcap)
     try:
         driver.get(login_url)
