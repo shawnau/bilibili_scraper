@@ -129,5 +129,5 @@ def logout(driver, login_url):
     finally:
         driver.close()
 
-login("http://mis.sse.ustc.edu.cn/", "sa16225220", "decswxaqz")
+login("http://mis.sse.ustc.edu.cn/", "username", "password")
 scraper("http://mis.sse.ustc.edu.cn/", "http://mis.sse.ustc.edu.cn/Base/NoticeInfo/ListView.aspx")
