@@ -91,8 +91,7 @@ def get_video_bgmlist(driver, page_url, p):
 
 # 主程序
 def scraper(scrape_url, p, flag):
-    driver = webdriver.PhantomJS(executable_path=p.driverPath,
-                                 desired_capabilities=p.dcap)
+    driver = webdriver.PhantomJS(executable_path=p.driverPath, desired_capabilities=p.dcap)
     if flag == "new":
         link_list = get_video_bgmlist(driver, scrape_url, p)
     elif flag == "old":
