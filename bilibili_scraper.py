@@ -26,8 +26,7 @@ def init_parameters():
     p.dcap = dict(DesiredCapabilities.PHANTOMJS)
     p.dcap["phantomjs.page.settings.userAgent"] = \
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:25.0) Gecko/20100101 Firefox/25.0 "
-    # phantonJS的bin文件地址
-    p.driverPath = "/Users/Shawn/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs"
+
     # xpaths
     p.xPaths["sortByHotButton"] = ".//*[@id='list_order_hot']"
     p.xPaths["videoList"] = "html/body/div[4]/div/div[2]/div/div[2]/div[2]/div[2]/ul"
@@ -38,12 +37,13 @@ def init_parameters():
     return p
 
 
+# 提取旧番页面的链接列表
 def get_video_plist(driver, page_url, p):
     link_list = []
     cut_current_list = re.search("/video/av[0-9]+/", page_url).group(0)
     try:
         driver.get(page_url)
-        # 检查是否多p
+        # 检查是否有多p
         span = driver.find_elements_by_xpath(p.xPaths["plistButton"])
         if len(span) == 0:
             raise Exception('No other page found')
@@ -67,6 +67,7 @@ def get_video_plist(driver, page_url, p):
         return link_list
 
 
+# 提取新番页面的链接列表
 def get_video_bgmlist(driver, page_url, p):
     link_list = []
     cut_list = re.search("/video/av[0-9]+/", page_url).group(0)
@@ -88,6 +89,7 @@ def get_video_bgmlist(driver, page_url, p):
         return link_list
 
 
+# 主程序
 def scraper(scrape_url, p, flag):
     driver = webdriver.PhantomJS(executable_path=p.driverPath,
                                  desired_capabilities=p.dcap)
@@ -127,6 +129,7 @@ def scraper(scrape_url, p, flag):
     driver.close()
 
 
+# 取得页面弹幕编号和标题
 def get_page_info(driver, page_url, p):
     try:
         driver.get(page_url)
@@ -143,6 +146,7 @@ def get_page_info(driver, page_url, p):
         return False
 
 
+# 下载弹幕
 def save_comments(driver, p):
     # b站保存弹幕的地址在此
     comment_url = "http://comment.bilibili.tv/" + p.cid + ".xml"
@@ -163,5 +167,9 @@ def save_comments(driver, p):
         return False
 
 p = init_parameters()
+# 填写你自己的phantonJS的bin下的可执行文件地址
+p.driverPath = "/Users/Shawn/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs"
+# 测试样例, 分别对应旧番, 新番, 无多p的视频
 scraper("http://www.bilibili.com/video/av5313786/", p, "old")
 scraper("http://www.bilibili.com/video/av5280311/", p, "new")
+scraper("http://www.bilibili.com/video/av5360837/", p, "old")
