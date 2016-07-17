@@ -1,12 +1,8 @@
 # -*- coding:utf-8 -*-
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import re
 from bs4 import BeautifulSoup
-import time
 
 
 class Parameters:
@@ -165,10 +161,10 @@ def save_comments(driver, p):
         print(ex)
         return False
 
-p = init_parameters()
+parameter = init_parameters()
 # 填写你自己的phantonJS的bin下的可执行文件地址
-p.driverPath = "/Users/Shawn/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs"
+parameter.driverPath = "/Users/Shawn/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs"
 # 测试样例, 分别对应旧番, 新番, 无多p的视频
-scraper("http://www.bilibili.com/video/av5313786/", p, "old")
-scraper("http://www.bilibili.com/video/av5280311/", p, "new")
-scraper("http://www.bilibili.com/video/av5360837/", p, "old")
+scraper("http://www.bilibili.com/video/av5313786/", parameter, "old")
+scraper("http://www.bilibili.com/video/av5280311/", parameter, "new")
+scraper("http://www.bilibili.com/video/av5360837/", parameter, "old")
