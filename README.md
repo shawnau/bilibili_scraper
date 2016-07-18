@@ -23,7 +23,8 @@
  - 安装selenium和beautifulsoup4. 在cmd中输入:
 
      ```
- pip install selenium, beautifulsoup4 -i https://pypi.douban.com/simple
+ pip install selenium -i https://pypi.douban.com/simple
+ pip install beautifulsoup4 -i https://pypi.douban.com/simple
      ```
  等待安装完毕即可.
  
