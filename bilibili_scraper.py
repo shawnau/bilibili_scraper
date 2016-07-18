@@ -122,6 +122,7 @@ def scraper(scrape_url, p, flag):
             if not save_flag:
                 print("Retry times out, skip")
                 continue
+    print("All done!")
     driver.close()
 
 
@@ -178,6 +179,5 @@ def load_config():
             full_url = "http://www.bilibili.com/video/" + video[0] + "/"
             flag = video[1]
             scraper(full_url, p, flag)
-        print (config)
 
 load_config()
