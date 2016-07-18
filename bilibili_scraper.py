@@ -148,8 +148,6 @@ def get_page_info(driver, page_url, p):
 def save_comments(driver, p):
     # b站保存弹幕的地址在此
     comment_url = "http://comment.bilibili.tv/" + p.cid + ".xml"
-    if p.sysInfo == "windows":
-        print(p.title.decode('utf-8'))
     print(p.title)
     print("Fetching...")
     # 下载xml, 按标题作为文件名保存, 超时时长30秒
