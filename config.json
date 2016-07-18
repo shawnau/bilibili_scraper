@@ -1,0 +1,9 @@
+{
+  "system": "osx",
+  "phantomJS_path": "/Users/Shawn/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs",
+  "video_list": [
+    ["av5313786", "old"],
+    ["av5280311", "new"],
+    ["av5360837", "old"]
+  ]
+}

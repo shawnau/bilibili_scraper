@@ -8,12 +8,12 @@ import re
 class Parameters:
     def __init__(self):
         self.dcap = {}
-        self.driverPath = ""
-        self.savePath = ""
         self.xPaths = {}
+        self.togglename = "v-part-toggle"
+        self.sysInfo = ""
+        self.driverPath = ""
         self.cid = ""
         self.title = ""
-        self.togglename = "v-part-toggle"
 
 
 # 初始化参数
@@ -135,7 +135,7 @@ def get_page_info(driver, page_url, p):
         cid_reg = re.compile("(?<=cid=)[0-9]+")
         raw_title = re.search(title_reg, source_code).group(0)
         # 替换非法字符为下划线, 处理win下文件名问题
-        p.title = re.sub(u"[^\u4e00-\u9fa5_a-zA-Z0-9]", "_", raw_title).encode('utf-8')
+        p.title = re.sub(u"[^\u4e00-\u9fa5_a-zA-Z0-9]", "_", raw_title)
         p.cid = str(re.search(cid_reg, source_code).group(0))
         return True
     except Exception as ex:
@@ -155,13 +155,12 @@ def save_comments(driver, p):
         driver.set_page_load_timeout(30)
         driver.get(comment_url)
         source = driver.page_source
-        import os
-        if not os.path.exists(r"./data"):
-            os.makedirs(r"./data/")
-        save_path = p.savePath + p.title + ".xml"
-        # 这里不decode为unicode, 在win下会报错
-        with open(save_path.decode('utf-8'), 'w') as fd:
-            fd.write(source.encode('utf-8'))
+        save_path = "./data/" + p.title + ".xml"
+        # 这里不encode为utf8, 在osx下会报错
+        if p.sysInfo == "osx" or p.sysInfo == "linux":
+            save_path = save_path.encode('utf-8')
+        with open(save_path, 'w') as fp:
+            fp.write(source.encode('utf-8'))
             print("Saved!")
         return True
     except Exception as ex:
@@ -169,11 +168,18 @@ def save_comments(driver, p):
         print(ex)
         return False
 
-parameter = init_parameters()
-# 填写你自己的phantonJS的bin下的可执行文件地址
-parameter.driverPath = r"/Users/Shawn/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs"
-parameter.savePath = r"D:/data/"
-# 测试样例, 分别对应旧番, 新番, 无多p的视频
-# scraper("http://www.bilibili.com/video/av5313786/", parameter, "old")
-# scraper("http://www.bilibili.com/video/av5280311/", parameter, "new")
-scraper("http://www.bilibili.com/video/av5360837/", parameter, "old")
+
+def load_config():
+    import json
+    p = init_parameters()
+    with open("./config.json", 'r') as fp:
+        config = json.load(fp)
+        p.sysInfo = config["system"]
+        p.driverPath = config["phantomJS_path"]
+        for video in config["video_list"]:
+            full_url = "http://www.bilibili.com/video/" + video[0] + "/"
+            flag = video[1]
+            scraper(full_url, p, flag)
+        print (config)
+
+load_config()
