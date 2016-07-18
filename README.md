@@ -46,10 +46,15 @@
 
 5. 启动
 
- 打开cmd, 执行(假设下载至C:/webscraper-master/bilibili_scraper.py)
+ 打开cmd, 执行(假设下载至D:/bilibili_scraper-master/bilibili_scraper.py)
  
- ```
-     python C:/webscraper-master/bilibili_scraper.py
+ ```python
+     # 先切换到d盘 
+     d:
+     # 再进入下载器文件夹
+     cd webscraper-master
+     # 最后运行脚本
+     python bilibili_scraper.py
  ```
  下载弹幕会保存至data文件夹下.
 
