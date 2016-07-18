@@ -1,8 +1,8 @@
 # -*- coding:utf-8 -*-
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-import re
 from bs4 import BeautifulSoup
+import re
 
 
 class Parameters:
@@ -132,7 +132,9 @@ def get_page_info(driver, page_url, p):
         # 源代码中可以找到cid和title, 对应弹幕文件和标题
         title_reg = re.compile("(?<=<title>).*(?=</title>)")
         cid_reg = re.compile("(?<=cid=)[0-9]+")
-        p.title = re.search(title_reg, source_code).group(0).encode('utf-8')
+        raw_title = re.search(title_reg, source_code).group(0)
+        # 替换非法字符为下划线, 处理win下文件名问题
+        p.title = re.sub(u"[^\u4e00-\u9fa5_a-zA-Z0-9]", "_", raw_title).encode('utf-8')
         p.cid = str(re.search(cid_reg, source_code).group(0))
         return True
     except Exception as ex:
@@ -152,7 +154,7 @@ def save_comments(driver, p):
         driver.set_page_load_timeout(30)
         driver.get(comment_url)
         source = driver.page_source
-        with open("./data/" + p.title + ".xml", 'w') as fd:
+        with open(r"./data/" + p.title + ".xml", 'w') as fd:
             fd.write(source.encode('utf-8'))
             print("Saved!")
         return True
@@ -163,7 +165,7 @@ def save_comments(driver, p):
 
 parameter = init_parameters()
 # 填写你自己的phantonJS的bin下的可执行文件地址
-parameter.driverPath = "/Users/Shawn/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs"
+parameter.driverPath = r"/Users/Shawn/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs"
 # 测试样例, 分别对应旧番, 新番, 无多p的视频
 scraper("http://www.bilibili.com/video/av5313786/", parameter, "old")
 scraper("http://www.bilibili.com/video/av5280311/", parameter, "new")
