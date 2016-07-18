@@ -31,7 +31,7 @@
  - 在[官方网站](http://phantomjs.org)下载对应版本并解压, 记住解压地址. (假设解压至C:/phantomjs-2.1.1-widows/)
 
 4. 编辑下载参数
- - [下载本文件](https://github.com/shawnau/webscraper/archive/master.zip). 假设下载至C:/webscraper-master/bilibili_scraper.py
+ - [下载本文件](https://github.com/shawnau/webscraper/archive/master.zip) 并解压. 假设下载至C:/webscraper-master/bilibili_scraper.py
  - 用任一文本编辑器打开bilibili_scraper.py, 把倒数第五行的`bilibili_scraper.py` 之后双引号中的地址改成之前下载的phantomJS的exe文件的地址. 例如 `"C:/phantomjs-2.1.1-widows/bin/phantomjs.exe"` ,注意最好不要使用含中文的地址
  - 将最后一行中双引号中的地址改成需要下载的视频地址, 并检查需要下载的网页样式, 是新式([样例](http://www.bilibili.com/video/av5280311/)) 还是旧式([样例](http://www.bilibili.com/video/av5313786/)), 若为旧式, 请将`"old"` 参数改为`"new"`, 若为新式或者只有一个视频, 则无需变动
 
