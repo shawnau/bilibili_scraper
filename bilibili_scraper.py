@@ -9,6 +9,7 @@ class Parameters:
     def __init__(self):
         self.dcap = {}
         self.driverPath = ""
+        self.savePath = ""
         self.xPaths = {}
         self.cid = ""
         self.title = ""
@@ -157,7 +158,7 @@ def save_comments(driver, p):
         import os
         if not os.path.exists(r"./data"):
             os.makedirs(r"./data/")
-        save_path = r"./data/" + p.title + ".xml"
+        save_path = p.savePath + p.title + ".xml"
         # 这里不decode为unicode, 在win下会报错
         with open(save_path.decode('utf-8'), 'w') as fd:
             fd.write(source.encode('utf-8'))
@@ -171,6 +172,7 @@ def save_comments(driver, p):
 parameter = init_parameters()
 # 填写你自己的phantonJS的bin下的可执行文件地址
 parameter.driverPath = r"/Users/Shawn/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs"
+parameter.savePath = r"D:/data/"
 # 测试样例, 分别对应旧番, 新番, 无多p的视频
 # scraper("http://www.bilibili.com/video/av5313786/", parameter, "old")
 # scraper("http://www.bilibili.com/video/av5280311/", parameter, "new")
