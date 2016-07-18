@@ -21,10 +21,11 @@
 2. 使用pip并安装依赖组件:
  - 重启下cmd, 输入`pip --version` 检查一下是否安装了pip, 默认应该是python自带的, 会返回版本号
  - 安装selenium和beautifulsoup4. 在cmd中输入:
-    ```
-    pip install selenium, beautifulsoup4 -i https://pypi.douban.com/simple
-    ```
-    等待安装完毕即可.
+
+     ```
+ pip install selenium, beautifulsoup4 -i https://pypi.douban.com/simple
+     ```
+ 等待安装完毕即可.
  
 3. 下载phantomJS
  - 在[官方网站](http://phantomjs.org)下载对应版本并解压, 记住解压地址. (假设解压至C:/phantomjs-2.1.1-widows/)
@@ -37,7 +38,7 @@
 5. 启动
 
  打开cmd, 执行(同第4步的路径, 假设下载至C:/webscraper-master/bilibili_scraper.py)
-     
+ 
  ```
      python C:/webscraper-master/bilibili_scraper.py
  ```
