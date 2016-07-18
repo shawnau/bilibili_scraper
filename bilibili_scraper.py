@@ -154,6 +154,9 @@ def save_comments(driver, p):
         driver.set_page_load_timeout(30)
         driver.get(comment_url)
         source = driver.page_source
+        import os
+        if not os.path.exists(r"./data"):
+            os.makedirs(r"./data/")
         with open(r"./data/" + p.title + ".xml", 'w') as fd:
             fd.write(source.encode('utf-8'))
             print("Saved!")
@@ -167,6 +170,6 @@ parameter = init_parameters()
 # 填写你自己的phantonJS的bin下的可执行文件地址
 parameter.driverPath = r"/Users/Shawn/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs"
 # 测试样例, 分别对应旧番, 新番, 无多p的视频
-scraper("http://www.bilibili.com/video/av5313786/", parameter, "old")
-scraper("http://www.bilibili.com/video/av5280311/", parameter, "new")
+# scraper("http://www.bilibili.com/video/av5313786/", parameter, "old")
+# scraper("http://www.bilibili.com/video/av5280311/", parameter, "new")
 scraper("http://www.bilibili.com/video/av5360837/", parameter, "old")
