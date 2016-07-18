@@ -157,7 +157,9 @@ def save_comments(driver, p):
         import os
         if not os.path.exists(r"./data"):
             os.makedirs(r"./data/")
-        with open(r"./data/" + p.title + ".xml", 'w') as fd:
+        save_path = r"./data/" + p.title + ".xml"
+        # 这里不decode为unicode, 在win下会报错
+        with open(save_path.decode('utf-8'), 'w') as fd:
             fd.write(source.encode('utf-8'))
             print("Saved!")
         return True
